@@ -1,0 +1,52 @@
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.declarative import declarative_base
+from flask_login import UserMixin
+import uuid
+
+# The db object instantiated from the class SQLAlchemy represents the database and
+# provides access to all the functionality of Flask-SQLAlchemy
+db = SQLAlchemy()
+
+# create tables for db
+class User(db.Model, UserMixin):
+    __tablename__ = 'users'
+    
+    username = db.Column(db.String(20), primary_key=True)
+    email = db.Column(db.String(20), unique=True)
+    password = db.Column(db.String(20))
+    
+    # unique keys
+    watch_later = db.relationship('WatchLater', backref='user')
+    
+    def __repr__(self):
+        return '<User %r>' % self.username
+    
+class WatchLater(db.Model):
+    __tablename__ = 'watch_later'
+    
+    title = db.Column(db.String(20))
+    year = db.Column(db.String(4))
+    rated = db.Column(db.String(4))
+    released = db.Column(db.String(12))
+    runtime = db.Column(db.String(10))
+    imdb_id = db.Column(db.String(10), primary_key=True)
+    
+    user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
+    
+    def __repr__(self):
+        return '<WatchLater %r>' % self.imdb_id
+    
+class Favorite(db.Model):
+    __tablename__ = 'favorites'
+    
+    title = db.Column(db.String(20))
+    year = db.Column(db.String(4))
+    rated = db.Column(db.String(4))
+    released = db.Column(db.String(12))
+    runtime = db.Column(db.String(10))
+    imdb_id = db.Column(db.String(10), primary_key=True)
+    
+    user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
+    
+    def __repr__(self):
+        return '<Favorite %r>' % self.imdb_id

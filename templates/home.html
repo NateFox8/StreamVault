@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3 d-flex justify-content-center">
+                <h3><strong>Brand</strong></h3>
+            </div>
+        </div>
+    <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/static/images/Inception.jpg" class="d-block carousel-poster" alt="Movie Poster" style="max-width: 100%; max-height: 100%;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/static/images/Jaws.jpg" class="d-block carousel-poster" alt="Movie Poster" style="max-width: 100%; max-height: 100%;">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="/static/images/Toy_Story.jpg" class="d-block carousel-poster" alt="Movie Poster" >
+                </div>
+            </div>            
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev" style="left: 415px;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next" style="right: 415px;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>        
+    </div>    
+{% endblock %}
