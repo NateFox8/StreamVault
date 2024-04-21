@@ -3,7 +3,7 @@ from auth import auth_bp
 from config import Config
 from flask import Flask, render_template, redirect, url_for, jsonify, request, session, current_app
 from functools import wraps
-import requests
+import requests, csv
 
 # API url & key
 URL = "http://www.omdbapi.com/?"
@@ -117,6 +117,16 @@ def search():
         return render_template('search.html', movie_data=movie_data, username=username)
     else:
         return redirect(url_for('home'))
+    
+@app.route('/search_suggestions', methods=['GET'])
+def search_suggestions():
+    names = []
+    with open('static/data/movies.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            if row:  # Check if the row is not empty
+                names.append(row[0])
+    return jsonify(names)
 
 if __name__ == "__main__":
     # only run when initially setting up tables for the db

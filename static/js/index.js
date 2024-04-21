@@ -122,3 +122,24 @@ $(document).ready(function() {
 
     });
 });
+
+$(document).ready(function() {
+    $('#search-input').on('input', function() {
+        var query = $(this).val();
+        $.ajax({
+            url: '/search_suggestions',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var suggestions = response.filter(name => name.toLowerCase().includes(query.toLowerCase()));
+                var limitedSuggestions = suggestions.slice(0, 10);
+                $('#search-input').autocomplete({
+                    source: limitedSuggestions
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+});
