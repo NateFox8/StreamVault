@@ -48,7 +48,7 @@ $(document).ready(function() {
         $.ajax({
             url: '/signup',
             type: 'POST',
-            data: {email: email, username: username, password1: password1, password2: password2},
+            data: {email: email, username: username, password1: password1},
             success: function(response) {
                 if (response.success) {
                     window.location.href = '/profile';
@@ -60,5 +60,65 @@ $(document).ready(function() {
                 alert('Error occurred while processing your request.');
             }
         });
+    });
+});
+
+$(document).ready(function() {
+    $('#watch-later-btn').click(function(event) {
+        var username = this.getAttribute('username');
+        var movie_title = this.getAttribute('movie_title');
+        var movie_year = this.getAttribute('movie_year');
+        var movie_rated = this.getAttribute('movie_rated');
+        var movie_released = this.getAttribute('movie_released');
+        var movie_runtime = this.getAttribute('movie_runtime');
+        var movie_imdb_id = this.getAttribute('movie_imdb_id');
+        
+        $.ajax({
+            url: '/watch_list',
+            type: 'POST',
+            data: {username:username, movie_title:movie_title, movie_year:movie_year, movie_rated:movie_rated,
+            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id},
+            success: function(response) {
+                if (response.success) {
+                    alert('Added to watch later')
+                } else {
+                    alert('Already in user\'s watch later');
+                }
+            },
+            error: function() {
+                alert('Error occurred while processing your request.');
+            }
+        });
+
+    });
+});
+
+$(document).ready(function() {
+    $('#favorite-btn').click(function(event) {
+        var username = this.getAttribute('username');
+        var movie_title = this.getAttribute('movie_title');
+        var movie_year = this.getAttribute('movie_year');
+        var movie_rated = this.getAttribute('movie_rated');
+        var movie_released = this.getAttribute('movie_released');
+        var movie_runtime = this.getAttribute('movie_runtime');
+        var movie_imdb_id = this.getAttribute('movie_imdb_id');
+        
+        $.ajax({
+            url: '/favorites',
+            type: 'POST',
+            data: {username:username, movie_title:movie_title, movie_year:movie_year, movie_rated:movie_rated,
+            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id},
+            success: function(response) {
+                if (response.success) {
+                    alert('Added to favorites')
+                } else {
+                    alert('Already in user\'s favorites');
+                }
+            },
+            error: function() {
+                alert('Error occurred while processing your request.');
+            }
+        });
+
     });
 });

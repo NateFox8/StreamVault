@@ -28,8 +28,7 @@ def signup():
     if request.method == 'POST':    
         email = request.form.get('email')
         username = request.form.get('username')
-        password1 = request.form.get('password1')
-        password2 = request.form.get('password2')        
+        password = request.form.get('password1')
                 
         user = User.query.filter_by(username=username).first()
         
@@ -37,7 +36,7 @@ def signup():
             print('username is taken')
             return jsonify({'success': False}), 401           
         else:
-            new_user = User(email=email, username=username, password=password1)
+            new_user = User(email=email, username=username, password=password)
             db.session.add(new_user)
             db.session.commit()
             print('user: ' + username + ' created!')
