@@ -124,6 +124,52 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+    $('#delete-fav-btn').click(function(event) {
+        var favorite_id = this.getAttribute('favorite_id');
+        
+        $.ajax({
+            url: '/delete_fav',
+            type: 'POST',
+            data: {favorite_id:favorite_id},
+            success: function(response) {
+                if (response.success) {
+                    alert('Deleted from favorites')
+                } else {
+                    alert('Failed to remove from favorites');
+                }
+            },
+            error: function() {
+                alert('Error occurred while processing your request.');
+            }
+        });
+
+    });
+});
+
+$(document).ready(function() {
+    $('#delete-wl-btn').click(function(event) {
+        var watch_later_id = this.getAttribute('watch_later_id');
+        
+        $.ajax({
+            url: '/delete_watch_later',
+            type: 'POST',
+            data: {watch_later_id:watch_later_id},
+            success: function(response) {
+                if (response.success) {
+                    alert('Deleted from watch later')
+                } else {
+                    alert('Failed to remove from watch later');
+                }
+            },
+            error: function() {
+                alert('Error occurred while processing your request.');
+            }
+        });
+
+    });
+});
+
+$(document).ready(function() {
     $('#search-input').on('input', function() {
         var query = $(this).val();
         $.ajax({

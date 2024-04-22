@@ -105,6 +105,32 @@ def favorites():
                 
     return render_template('favorites.html', favorites=favorites)
 
+@app.route('/delete_fav', methods=['POST'])
+@login_required
+def delete_fav():
+    favorite_id = request.form.get('favorite_id')
+    favorite = Favorite.query.filter_by(favorite_id=favorite_id).first()
+    
+    if favorite:
+        db.session.delete(favorite)
+        db.session.commit()
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False})    
+
+@app.route('/delete_watch_later', methods=['POST'])
+@login_required
+def delete_watch_later():
+    watch_later_id = request.form.get('watch_later_id')
+    watch_later = WatchLater.query.filter_by(watch_later_id=watch_later_id).first()
+    
+    if watch_later:
+        db.session.delete(watch_later)
+        db.session.commit()
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False})
+
 @app.route('/profile', methods=['GET'])
 @login_required
 def profile():        
