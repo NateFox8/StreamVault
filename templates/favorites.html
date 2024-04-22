@@ -1,4 +1,25 @@
 {% extends "base.html" %} {% block title %}Favorites{% endblock %} {% block content
     %}
-    
+    <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Rated</th>
+            <th>Released</th>
+            <th>Runtime</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for favorite in favorites %}
+          <tr>
+            <td>{{ favorite.title }}</td>
+            <td>{{ favorite.year }}</td>
+            <td>{{ favorite.rated }}</td>
+            <td>{{ favorite.released }}</td>
+            <td>{{ favorite.runtime }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>    
 {% endblock %}

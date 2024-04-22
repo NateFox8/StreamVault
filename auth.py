@@ -20,8 +20,7 @@ def login():
                 print('incorrect password')
                 return jsonify({'success': False}), 401         
     
-    return render_template('login.html')
-    
+    return render_template('login.html')    
     
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -41,8 +40,7 @@ def signup():
             db.session.commit()
             print('user: ' + username + ' created!')
             session['username'] = username
-            return jsonify({'success': True})
-            
+            return jsonify({'success': True})            
                 
     return render_template('signup.html')
 

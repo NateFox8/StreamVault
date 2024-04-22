@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     
     # unique keys
     watch_later = db.relationship('WatchLater', backref='user')
+    favorites = db.relationship('Favorite', backref='user')    
     
     def __repr__(self):
         return '<User %r>' % self.username
@@ -24,12 +25,13 @@ class User(db.Model, UserMixin):
 class WatchLater(db.Model):
     __tablename__ = 'watch_later'
     
+    watch_later_id = db.Column(db.String(36), primary_key=True, unique=True, default=lambda: str(uuid.uuid4()))
     title = db.Column(db.String(20))
     year = db.Column(db.String(4))
     rated = db.Column(db.String(4))
     released = db.Column(db.String(12))
     runtime = db.Column(db.String(10))
-    imdb_id = db.Column(db.String(10), primary_key=True)
+    imdb_id = db.Column(db.String(10))
     
     user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
     
@@ -39,12 +41,13 @@ class WatchLater(db.Model):
 class Favorite(db.Model):
     __tablename__ = 'favorites'
     
+    favorite_id = db.Column(db.String(36), primary_key=True, unique=True, default=lambda: str(uuid.uuid4()))
     title = db.Column(db.String(20))
     year = db.Column(db.String(4))
     rated = db.Column(db.String(4))
     released = db.Column(db.String(12))
     runtime = db.Column(db.String(10))
-    imdb_id = db.Column(db.String(10), primary_key=True)
+    imdb_id = db.Column(db.String(10))
     
     user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
     

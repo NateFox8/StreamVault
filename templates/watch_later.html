@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %}Watch Later{% endblock %} {% block content
+    %}
+    <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Rated</th>
+            <th>Released</th>
+            <th>Runtime</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for watch_later in watch_later_list %}
+          <tr>
+            <td>{{ watch_later.title }}</td>
+            <td>{{ watch_later.year }}</td>
+            <td>{{ watch_later.rated }}</td>
+            <td>{{ watch_later.released }}</td>
+            <td>{{ watch_later.runtime }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock %}

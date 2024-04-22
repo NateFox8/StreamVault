@@ -33,9 +33,9 @@ def index():
 def home():        
     return render_template('home.html')
 
-@app.route('/watch_list', methods=['GET', 'POST'])
+@app.route('/watch_later', methods=['GET', 'POST'])
 @login_required
-def watch_list(): 
+def watch_later(): 
     if request.method == 'POST':
         username = request.form.get('username')
         movie_title = request.form.get('movie_title')  
@@ -63,8 +63,11 @@ def watch_list():
             db.session.add(new_watch_later)
             db.session.commit()
             return jsonify({'success': True})
+        
+    username = session['username']       
+    watch_later_list = WatchLater.query.filter_by(user_username=username).all()
           
-    return render_template('watch_list.html')
+    return render_template('watch_later.html', watch_later_list=watch_later_list)
 
 @app.route('/favorites', methods=['GET', 'POST'])
 @login_required
@@ -96,8 +99,11 @@ def favorites():
             db.session.add(new_favorite)
             db.session.commit()
             return jsonify({'success': True})
+        
+    username = session['username']       
+    favorites = Favorite.query.filter_by(user_username=username).all()
                 
-    return render_template('favorites.html')
+    return render_template('favorites.html', favorites=favorites)
 
 @app.route('/profile', methods=['GET'])
 @login_required
@@ -124,7 +130,7 @@ def search_suggestions():
     with open('static/data/movies.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            if row:  # Check if the row is not empty
+            if row:
                 names.append(row[0])
     return jsonify(names)
 
