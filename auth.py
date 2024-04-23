@@ -18,7 +18,7 @@ def login():
                 return jsonify({'success': True})
             else:
                 print('incorrect password')
-                return jsonify({'success': False}), 401         
+                return jsonify({'success': False})        
     
     return render_template('login.html')    
     
