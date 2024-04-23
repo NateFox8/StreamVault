@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block title %}Watch Later{% endblock %} {% block content
     %}
-    <table>
+    <table class="table table-hover">
         <thead>
           <tr>
             <th>Title</th>
@@ -14,7 +14,7 @@
         <tbody>
           {% for watch_later in watch_later_list %}
           <tr>
-            <td>{{ watch_later.title }}</td>
+            <td><a href="http://127.0.0.1:5000/search?title={{watch_later.title}}">{{ watch_later.title }}</a></td>
             <td>{{ watch_later.year }}</td>
             <td>{{ watch_later.rated }}</td>
             <td>{{ watch_later.released }}</td>

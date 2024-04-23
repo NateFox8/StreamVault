@@ -5,8 +5,21 @@ $(document).ready(function() {
         var username = $('#username').val();
         var password = $('#password').val();
 
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)}
+
         if (!username || !password) {
-            alert('Please enter both username and password.');
+            alert('Please enter both username and password.', 'danger');
             return;
         }
 
@@ -37,11 +50,24 @@ $(document).ready(function() {
         var password1 = $('#password1').val();
         var password2 = $('#password2').val();
 
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)}
+
         if (!email || !username || !password1 || !password2) {
-            alert('Please enter email, username, and password.');
+            alert('Please enter email, username, and password.', 'danger');
             return;
         } else if (password1 != password2) {
-            alert('Passwords don\'t match');
+            alert('Passwords don\'t match', 'danger');
             return;
         }
 
@@ -53,7 +79,7 @@ $(document).ready(function() {
                 if (response.success) {
                     window.location.href = '/profile';
                 } else {
-                    alert('Signup failed. Please try again.');
+                    alert('Signup failed. Please try again.', 'success');
                 }
             },
             error: function() {
@@ -72,17 +98,32 @@ $(document).ready(function() {
         var movie_released = this.getAttribute('movie_released');
         var movie_runtime = this.getAttribute('movie_runtime');
         var movie_imdb_id = this.getAttribute('movie_imdb_id');
+        var poster = this.getAttribute('poster');
+
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)}
+
         
         $.ajax({
-            url: '/watch_list',
+            url: '/watch_later',
             type: 'POST',
             data: {username:username, movie_title:movie_title, movie_year:movie_year, movie_rated:movie_rated,
-            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id},
+            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id, poster:poster},
             success: function(response) {
                 if (response.success) {
-                    alert('Added to watch later')
+                    alert('Added to watch later', 'success')
                 } else {
-                    alert('Already in user\'s watch later');
+                    alert('Already in user\'s watch later', 'danger');
                 }
             },
             error: function() {
@@ -102,17 +143,32 @@ $(document).ready(function() {
         var movie_released = this.getAttribute('movie_released');
         var movie_runtime = this.getAttribute('movie_runtime');
         var movie_imdb_id = this.getAttribute('movie_imdb_id');
+        var poster = this.getAttribute('poster');
+
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)}
+
         
         $.ajax({
             url: '/favorites',
             type: 'POST',
             data: {username:username, movie_title:movie_title, movie_year:movie_year, movie_rated:movie_rated,
-            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id},
+            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id, poster:poster},
             success: function(response) {
                 if (response.success) {
-                    alert('Added to favorites')
+                    alert('Added to favorites', 'success')
                 } else {
-                    alert('Already in user\'s favorites');
+                    alert('Already in user\'s favorites', 'danger');
                 }
             },
             error: function() {
@@ -126,6 +182,19 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#delete-fav-btn').click(function(event) {
         var favorite_id = this.getAttribute('favorite_id');
+
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)}
         
         $.ajax({
             url: '/delete_fav',
@@ -133,9 +202,12 @@ $(document).ready(function() {
             data: {favorite_id:favorite_id},
             success: function(response) {
                 if (response.success) {
-                    alert('Deleted from favorites')
+                    alert('Removed from favorites', 'success');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
                 } else {
-                    alert('Failed to remove from favorites');
+                    alert('Failed to remove from favorites', 'danger');
                 }
             },
             error: function() {
@@ -149,6 +221,19 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#delete-wl-btn').click(function(event) {
         var watch_later_id = this.getAttribute('watch_later_id');
+
+        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)}
         
         $.ajax({
             url: '/delete_watch_later',
@@ -156,9 +241,12 @@ $(document).ready(function() {
             data: {watch_later_id:watch_later_id},
             success: function(response) {
                 if (response.success) {
-                    alert('Deleted from watch later')
+                    alert('Removed from watch later', 'success');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
                 } else {
-                    alert('Failed to remove from watch later');
+                    alert('Failed to remove from watch later', 'danger');
                 }
             },
             error: function() {

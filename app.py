@@ -44,7 +44,8 @@ def watch_later():
         movie_released = request.form.get('movie_released')  
         movie_runtime = request.form.get('movie_runtime')  
         movie_imdb_id = request.form.get('movie_imdb_id')
-        
+        poster = request.form.get('poster')
+               
         watch_later = WatchLater.query.filter_by(user_username=username, title=movie_title).first()
         
         if watch_later:
@@ -58,6 +59,7 @@ def watch_later():
                 released=movie_released,
                 runtime=movie_runtime,
                 imdb_id=movie_imdb_id,
+                poster=poster,
                 user_username=username
             )
             db.session.add(new_watch_later)
@@ -80,6 +82,8 @@ def favorites():
         movie_released = request.form.get('movie_released')  
         movie_runtime = request.form.get('movie_runtime')  
         movie_imdb_id = request.form.get('movie_imdb_id')
+        poster = request.form.get('poster')
+        
         
         favorite = Favorite.query.filter_by(user_username=username, title=movie_title).first()
         
@@ -94,6 +98,7 @@ def favorites():
                 released=movie_released,
                 runtime=movie_runtime,
                 imdb_id=movie_imdb_id,
+                poster=poster,
                 user_username=username
             )
             db.session.add(new_favorite)

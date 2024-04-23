@@ -32,6 +32,7 @@ class WatchLater(db.Model):
     released = db.Column(db.String(12))
     runtime = db.Column(db.String(10))
     imdb_id = db.Column(db.String(10))
+    poster = db.Column(db.String(255))
     
     user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
     
@@ -48,6 +49,7 @@ class Favorite(db.Model):
     released = db.Column(db.String(12))
     runtime = db.Column(db.String(10))
     imdb_id = db.Column(db.String(10))
+    poster = db.Column(db.String(255))
     
     user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
     

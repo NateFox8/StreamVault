@@ -17,37 +17,40 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="home">Brand</a>                        
-            <div class="collapse navbar-collapse d-flex justify-content-between">
-                    <div>
-                        <ul class="navbar-nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" href="home">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="watch_later">Watch Later</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="favorites">Favorites</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="logout">Logout</a>
-                            </li>
-                        </ul>                            
-                    </div>
-                    <div>
-                        <form class="d-flex" role="search" action="http://127.0.0.1:5000/search" method="get">
-                            <input class="form-control me-2" id="search-input" type="search" name="title" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form> 
-                    </div>
+            <div>
+                <a class="navbar-brand" href="home">Brand</a> 
+            </div>
+            <div class="navbar-collapse d-flex justify-content-between">                
+                <div>
+                    <ul class="navbar-nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="watch_later">Watch Later</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="favorites">Favorites</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout">Logout</a>
+                        </li>
+                    </ul>                            
+                </div>
+                
+                <div>
+                    <form class="d-flex" role="search" action="http://127.0.0.1:5000/search" method="get">
+                        <input class="form-control me-2" id="search-input" type="search" name="title" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form> 
+                </div>
             </div>            
         </div>
     </nav>
-    
+    <div id="liveAlertPlaceholder"></div>
     <div class="container">{% block content %} {% endblock %}</div>
 </body>
 </html>
