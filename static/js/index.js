@@ -110,7 +110,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#delete-fav-btn').click(function(event) {
+    $('.delete-fav-btn').click(function(event) {
         var favorite_id = this.getAttribute('favorite_id');
 
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
@@ -149,7 +149,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $('#delete-wl-btn').click(function(event) {
+    $('.delete-wl-btn').click(function(event) {
         var watch_later_id = this.getAttribute('watch_later_id');
 
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
@@ -186,4 +186,3 @@ $(document).ready(function() {
 
     });
 });
-

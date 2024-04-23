@@ -151,6 +151,7 @@ def search():
         PARAMS = {'apikey': api_key, 't': title, 'plot': 'full'}
         response = requests.get(url=URL, params=PARAMS)
         movie_data = response.json()
+        print(movie_data)
         return render_template('search.html', movie_data=movie_data, username=username)
     else:
         return redirect(url_for('home'))
