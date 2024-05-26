@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, jsonify, request, session
 from models import *
-from config import URL, api_key, TMBD_KEY, ACCESS_TOKEN
+from api_keys import URL, api_key, TMBD_KEY, ACCESS_TOKEN
 from functools import wraps
 import requests, csv
 
