@@ -87,7 +87,6 @@ $(document).ready(function() {
         ].join('')
 
         alertPlaceholder.append(wrapper)}
-
         
         $.ajax({
             url: '/favorites',
