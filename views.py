@@ -1,16 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, jsonify, request, session
 from models import *
+from config import URL, api_key, TMBD_KEY, ACCESS_TOKEN
 from functools import wraps
 import requests, csv
 
 views_bp = Blueprint('views', __name__)
-
-# API url & key
-URL = "http://www.omdbapi.com/?"
-api_key = "2265b973"
-
-TMBD_KEY = "f4b52c3670b8f6f64a5b5c1310e0a37e"
-ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNGI1MmMzNjcwYjhmNmY2NGE1YjVjMTMxMGUwYTM3ZSIsInN1YiI6IjY2M2NkZjgyMzMzMjM2ZDg1OWEzYWYwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E9n00Hu42cmHNv6796nZ0nqqaiM9Z52dCbV3s-3u5CQ"
 
 def login_required(f):
     @wraps(f)
@@ -152,7 +146,7 @@ def search():
     else:
         return redirect(url_for('home'))
     
-# @app.route('/search', methods=['GET'])
+# @views_bp.route('/search', methods=['GET'])
 # @login_required
 def tmdb():
     title = request.args.get('title')
@@ -162,15 +156,15 @@ def tmdb():
         
         headers = {
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNGI1MmMzNjcwYjhmNmY2NGE1YjVjMTMxMGUwYTM3ZSIsInN1YiI6IjY2M2NkZjgyMzMzMjM2ZDg1OWEzYWYwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.E9n00Hu42cmHNv6796nZ0nqqaiM9Z52dCbV3s-3u5CQ"
+        "Authorization": "Bearer " + ACCESS_TOKEN
         }
                 
         response = requests.get(url, headers=headers)  
         movie_data = response.json()
         print(movie_data['results'][0])
-        return redirect(url_for('home'))      
+        return redirect(url_for('views.home'))      
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('views.home'))
     
 @views_bp.route('/search_suggestions', methods=['GET'])
 def search_suggestions():
