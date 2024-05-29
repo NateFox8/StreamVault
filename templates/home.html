@@ -1,35 +1,27 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %}
-        <div class="row">
-            <div class="col-md-6 offset-md-3 d-flex justify-content-center">
-                <h3><strong></strong></h3>
-            </div>
-        </div>
-        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <img src="/static/images/Inception.jpg" class="d-block carousel-poster" alt="Inception Poster">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <img src="/static/images/Jaws.jpg" class="d-block carousel-poster" alt="Jaws Poster">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <img src="/static/images/Toy_Story.jpg" class="d-block carousel-poster" alt="Toy Story Poster">
-                    </div>
-                </div>            
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev" style="left: 415px;">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next" style="right: 415px;">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>        
-        </div>    
+{% extends "base.html" %} {% block title %}Home{% endblock %} 
+{% block content%}
+<div class="header">
+    <h4>Trending Movies</h4>
+</div>
+<div class="wrapper">
+    {% for movie in popular_movies %}
+    <div class="item">
+        <a href="http://127.0.0.1:5000/search?title=inception">
+            <img src="/static/images/Inception.jpg" alt="Inception Poster">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<div class="header">
+    <h4>Trending Shows</h4>
+</div>
+<div class="wrapper">
+    {% for tv in popular_tv %}
+    <div class="item">
+        <a href="http://127.0.0.1:5000/search?title=inception">
+            <img src="/static/images/Inception.jpg" alt="Inception Poster">
+        </a>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

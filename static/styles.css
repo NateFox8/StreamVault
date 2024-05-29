@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 html, body {
     height: 100%;
     margin: 0;
@@ -10,7 +12,6 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
 
 .signup-btn {
     text-decoration: none;
@@ -61,4 +62,30 @@ th, td {
   
 th {
     background-color: #f2f2f2;
+}
+
+.header {
+    display: flex;
+    margin-top: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+    max-height: 280px;
+    border: 1px solid #ddd;
+    display: flex;
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 0;
+}
+
+.wrapper .item {
+    margin-right: 100px;
+}
+
+.wrapper .item img {
+    height: 275px;
 }

@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, jsonify, request, session
 from models import *
-from api_keys import URL, api_key, TMBD_KEY, ACCESS_TOKEN
+from api_keys import *
 from functools import wraps
 import requests, csv
+from util import *
 
 views_bp = Blueprint('views', __name__)
 
@@ -30,12 +31,6 @@ def watch_later():
     if request.method == 'POST':
         username = request.form.get('username')
         movie_title = request.form.get('movie_title')  
-        movie_year = request.form.get('movie_year')  
-        movie_rated = request.form.get('movie_rated')  
-        movie_released = request.form.get('movie_released')  
-        movie_runtime = request.form.get('movie_runtime')  
-        movie_imdb_id = request.form.get('movie_imdb_id')
-        poster = request.form.get('poster')
                
         watch_later = WatchLater.query.filter_by(user_username=username, title=movie_title).first()
         
@@ -45,12 +40,12 @@ def watch_later():
         else: 
             new_watch_later = WatchLater(
                 title=movie_title,
-                year=movie_year,
-                rated=movie_rated,
-                released=movie_released,
-                runtime=movie_runtime,
-                imdb_id=movie_imdb_id,
-                poster=poster,
+                year=request.form.get('movie_year'),
+                rated=request.form.get('movie_rated'),
+                released=request.form.get('movie_released'),
+                runtime=request.form.get('movie_runtime'),
+                imdb_id=request.form.get('movie_imdb_id'),
+                poster=request.form.get('poster'),
                 user_username=username
             )
             db.session.add(new_watch_later)
@@ -67,13 +62,7 @@ def watch_later():
 def favorites():
     if request.method == 'POST':
         username = request.form.get('username')
-        movie_title = request.form.get('movie_title')  
-        movie_year = request.form.get('movie_year')  
-        movie_rated = request.form.get('movie_rated')  
-        movie_released = request.form.get('movie_released')  
-        movie_runtime = request.form.get('movie_runtime')  
-        movie_imdb_id = request.form.get('movie_imdb_id')
-        poster = request.form.get('poster')        
+        movie_title = request.form.get('movie_title')
         
         favorite = Favorite.query.filter_by(user_username=username, title=movie_title).first()
         
@@ -83,12 +72,12 @@ def favorites():
         else: 
             new_favorite = Favorite(
                 title=movie_title,
-                year=movie_year,
-                rated=movie_rated,
-                released=movie_released,
-                runtime=movie_runtime,
-                imdb_id=movie_imdb_id,
-                poster=poster,
+                year=request.form.get('movie_year'),
+                rated=request.form.get('movie_rated'),
+                released=request.form.get('movie_released'),
+                runtime=request.form.get('movie_runtime'),
+                imdb_id=request.form.get('movie_imdb_id'),
+                poster=request.form.get('poster'),
                 user_username=username
             )
             db.session.add(new_favorite)
@@ -135,36 +124,16 @@ def profile():
 @login_required
 def search():   
     username = session['username']       
-    title = request.args.get('title')    
-    
+    title = request.args.get('title')
+        
     if title:
-        PARAMS = {'apikey': api_key, 't': title, 'plot': 'full'}
-        response = requests.get(url=URL, params=PARAMS)
+        PARAMS = {'apikey': OMDB_KEY, 't': title, 'plot': 'full'}
+        response = requests.get(url=OMDB_URL, params=PARAMS)
         movie_data = response.json()
         print(movie_data)
         return render_template('search.html', movie_data=movie_data, username=username)
     else:
         return redirect(url_for('home'))
-    
-# @views_bp.route('/search', methods=['GET'])
-# @login_required
-def tmdb():
-    title = request.args.get('title')
-    
-    if title:
-        url = f"https://api.themoviedb.org/3/search/movie?query={title}&include_adult=false&language=en-US&page=1"
-        
-        headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer " + ACCESS_TOKEN
-        }
-                
-        response = requests.get(url, headers=headers)  
-        movie_data = response.json()
-        print(movie_data['results'][0])
-        return redirect(url_for('views.home'))      
-    else:
-        return redirect(url_for('views.home'))
     
 @views_bp.route('/search_suggestions', methods=['GET'])
 def search_suggestions():
