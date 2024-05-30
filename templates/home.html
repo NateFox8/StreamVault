@@ -1,25 +1,25 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} 
 {% block content%}
 <div class="header">
-    <h4>Trending Movies</h4>
+    <h4>Popular Movies</h4>
 </div>
 <div class="wrapper">
-    {% for movie in popular_movies %}
+    {% for movie in movies %}
     <div class="item">
-        <a href="http://127.0.0.1:5000/search?title=inception">
-            <img src="/static/images/Inception.jpg" alt="Inception Poster">
+        <a href="http://127.0.0.1:5000/search?title={{ movie[0] }}">
+            <img src="https://image.tmdb.org/t/p/w185/{{ movie[1] }}" alt="{{ movie[0] }} Poster">
         </a>
     </div>
     {% endfor %}
 </div>
 <div class="header">
-    <h4>Trending Shows</h4>
+    <h4>Top Rated Movies</h4>
 </div>
 <div class="wrapper">
-    {% for tv in popular_tv %}
+    {% for movie in top_rated %}
     <div class="item">
-        <a href="http://127.0.0.1:5000/search?title=inception">
-            <img src="/static/images/Inception.jpg" alt="Inception Poster">
+        <a href="http://127.0.0.1:5000/search?title={{ movie[0] }}">
+            <img src="https://image.tmdb.org/t/p/w185/{{ movie[1] }}" alt="{{ movie[0] }} Poster">
         </a>
     </div>
     {% endfor %}

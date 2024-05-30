@@ -1,9 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, jsonify, request, session
 from models import *
-from api_keys import *
-from functools import wraps
-import requests, csv
 from util import *
+from functools import wraps
+import csv
 
 views_bp = Blueprint('views', __name__)
 
@@ -22,8 +21,10 @@ def index():
 
 @views_bp.route('/home', methods=['GET'])
 @login_required
-def home():        
-    return render_template('home.html')
+def home():
+    movies = get_popular_movies()
+    top_rated = get_top_rated_movies()
+    return render_template('home.html', movies=movies, top_rated=top_rated)
 
 @views_bp.route('/watch_later', methods=['GET', 'POST'])
 @login_required
@@ -44,8 +45,6 @@ def watch_later():
                 rated=request.form.get('movie_rated'),
                 released=request.form.get('movie_released'),
                 runtime=request.form.get('movie_runtime'),
-                imdb_id=request.form.get('movie_imdb_id'),
-                poster=request.form.get('poster'),
                 user_username=username
             )
             db.session.add(new_watch_later)
@@ -76,8 +75,6 @@ def favorites():
                 rated=request.form.get('movie_rated'),
                 released=request.form.get('movie_released'),
                 runtime=request.form.get('movie_runtime'),
-                imdb_id=request.form.get('movie_imdb_id'),
-                poster=request.form.get('poster'),
                 user_username=username
             )
             db.session.add(new_favorite)
@@ -124,14 +121,15 @@ def profile():
 @login_required
 def search():   
     username = session['username']       
-    title = request.args.get('title')
-        
+    title = request.args.get('title')    
+    
+    buy_options, rent_options, flatrate_options = (get_watch_providers(title))
+    print(flatrate_options)      
+    
     if title:
-        PARAMS = {'apikey': OMDB_KEY, 't': title, 'plot': 'full'}
-        response = requests.get(url=OMDB_URL, params=PARAMS)
-        movie_data = response.json()
-        print(movie_data)
-        return render_template('search.html', movie_data=movie_data, username=username)
+        omdb_info = get_omdb_movie_data(title)
+        tmdb_info = get_tmdb_movie_data(title)
+        return render_template('search.html', omdb_info=omdb_info, tmdb_info=tmdb_info, username=username)
     else:
         return redirect(url_for('home'))
     

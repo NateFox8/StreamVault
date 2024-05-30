@@ -27,8 +27,6 @@ $(document).ready(function() {
         var movie_rated = this.getAttribute('movie_rated');
         var movie_released = this.getAttribute('movie_released');
         var movie_runtime = this.getAttribute('movie_runtime');
-        var movie_imdb_id = this.getAttribute('movie_imdb_id');
-        var poster = this.getAttribute('poster');
 
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
@@ -48,7 +46,7 @@ $(document).ready(function() {
             url: '/watch_later',
             type: 'POST',
             data: {username:username, movie_title:movie_title, movie_year:movie_year, movie_rated:movie_rated,
-            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id, poster:poster},
+            movie_released:movie_released, movie_runtime:movie_runtime},
             success: function(response) {
                 if (response.success) {
                     alert('Added to watch later', 'success')
@@ -72,8 +70,6 @@ $(document).ready(function() {
         var movie_rated = this.getAttribute('movie_rated');
         var movie_released = this.getAttribute('movie_released');
         var movie_runtime = this.getAttribute('movie_runtime');
-        var movie_imdb_id = this.getAttribute('movie_imdb_id');
-        var poster = this.getAttribute('poster');
 
         const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 
@@ -92,7 +88,7 @@ $(document).ready(function() {
             url: '/favorites',
             type: 'POST',
             data: {username:username, movie_title:movie_title, movie_year:movie_year, movie_rated:movie_rated,
-            movie_released:movie_released, movie_runtime:movie_runtime, movie_imdb_id:movie_imdb_id, poster:poster},
+            movie_released:movie_released, movie_runtime:movie_runtime},
             success: function(response) {
                 if (response.success) {
                     alert('Added to favorites', 'success')
