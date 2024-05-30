@@ -89,3 +89,17 @@ th {
 .wrapper .item img {
     height: 275px;
 }
+
+.flatrate-options, .rent-options, .buy-options {
+    max-height: 50px;
+    border: 1px solid #ddd;
+    display: flex;
+    overflow-x: auto;
+    margin-top: 5px;
+    background-color: #ddd;
+}
+
+.flatrate-options img, .rent-options img, .buy-options img {
+    height: 45px;
+    margin-right: 5px;
+}

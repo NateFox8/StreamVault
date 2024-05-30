@@ -21,22 +21,29 @@ def get_movie_id(title):
     return search.results[0]['id']
 
 def get_watch_providers(title):
-    movie = tmdb.Movies(get_movie_id(title))
-    watch_providers = movie.watch_providers()['results']['US']
+    movie = tmdb.Movies(get_movie_id(title)) 
     
-    buy_options = {}
-    rent_options = {}
-    flatrate_options = {}
+    if movie.watch_providers()['results']:    
+        watch_providers = movie.watch_providers()['results']['US']
+            
+        buy_options = []
+        rent_options = []
+        flatrate_options = []
 
-    for category, providers in watch_providers.items():
-        if category == 'buy':
-            buy_options[category] = providers
-        elif category == 'rent':
-            rent_options[category] = providers
-        elif category == 'flatrate':
-            flatrate_options[category] = providers
+        for category, providers in watch_providers.items():
+            if category == 'buy':
+                for provider in providers:
+                    buy_options.append({'provider_name': provider['provider_name'], 'logo_path': provider['logo_path']})
+            elif category == 'rent':
+                for provider in providers:
+                    rent_options.append({'provider_name': provider['provider_name'], 'logo_path': provider['logo_path']})
+            elif category == 'flatrate':
+                for provider in providers:
+                    flatrate_options.append({'provider_name': provider['provider_name'], 'logo_path': provider['logo_path']})
 
-    return buy_options, rent_options, flatrate_options
+        return buy_options, rent_options, flatrate_options
+
+    return None, None, None
 
 def get_movie_poster(title):
     movie = tmdb.Movies(get_movie_id(title))
