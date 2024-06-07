@@ -90,6 +90,11 @@ th {
     height: 275px;
 }
 
+.stream-options h5 {
+    font-family: 'Roboto', sans-serif;
+    text-decoration: underline;
+}
+
 .flatrate-options, .rent-options, .buy-options {
     max-height: 50px;
     border: 1px solid #ddd;

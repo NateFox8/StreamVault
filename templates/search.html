@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %} {{ tmdb_info.title }} {% endblock %} {% block content
+{% extends "base.html" %} {% block title %} StreamVault | {{ tmdb_info.title }} {% endblock %} {% block content
     %}
     <div class="container mt-5">
         <div class="row">
@@ -47,8 +47,9 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-body">
-                        <p>Stream Options</p>
+                    <div class="card-body stream-options">
+                        <h5>Stream Options</h5>
+                        <p>Free</p>
                         <div class="flatrate-options">
                             {% if flatrate_options %}
                                 {% for provider in flatrate_options %}
@@ -60,7 +61,7 @@
                                 <p>No stream options available.</p>
                             {% endif %}
                         </div>
-                        <p>Rent Options</p>
+                        <p>Rent</p>
                         <div class="rent-options">
                             {% if rent_options %}
                                 {% for provider in rent_options %}
@@ -72,7 +73,7 @@
                                 <p>No rent options available.</p>
                             {% endif %}
                         </div>
-                        <p>Buy Options</p>
+                        <p>Buy</p>
                         <div class="buy-options">
                             {% if buy_options %}
                                 {% for provider in buy_options %}

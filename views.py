@@ -123,15 +123,13 @@ def search():
     username = session['username']       
     title = request.args.get('title')    
     
-    if get_watch_providers(title):
-        buy_options, rent_options, flatrate_options = (get_watch_providers(title))
-    
     if title:
+        buy_options, rent_options, flatrate_options = (get_watch_providers(title))
         omdb_info = get_omdb_movie_data(title)
         tmdb_info = get_tmdb_movie_data(title)
         return render_template('search.html', omdb_info=omdb_info, tmdb_info=tmdb_info, buy_options=buy_options, rent_options=rent_options, flatrate_options=flatrate_options, username=username)
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('views.home'))
     
 @views_bp.route('/search_suggestions', methods=['GET'])
 def search_suggestions():
