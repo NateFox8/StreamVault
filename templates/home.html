@@ -1,23 +1,19 @@
 {% extends "base.html" %} {% block title %}StreamVault | Home{% endblock %} 
 {% block content%}
-<div class="header">
-    <h4>Popular Movies</h4>
-</div>
-<div class="wrapper">
+<h3 class="header">Popular Movies</h3>
+<div class="popular-movies">
     {% for movie in movies %}
-    <div class="item">
+    <div class="popular-movies-poster">
         <a href="http://127.0.0.1:5000/search?title={{ movie[0] }}">
             <img src="https://image.tmdb.org/t/p/w185/{{ movie[1] }}" alt="{{ movie[0] }} Poster">
         </a>
     </div>
-    {% endfor %}
+    {% endfor %}        
 </div>
-<div class="header">
-    <h4>Top Rated Movies</h4>
-</div>
-<div class="wrapper">
+<h3 class="header">Top Rated Movies</h3>
+<div class="top-rated-movies">
     {% for movie in top_rated %}
-    <div class="item">
+    <div class="top-rated-movies-poster">
         <a href="http://127.0.0.1:5000/search?title={{ movie[0] }}">
             <img src="https://image.tmdb.org/t/p/w185/{{ movie[1] }}" alt="{{ movie[0] }} Poster">
         </a>
