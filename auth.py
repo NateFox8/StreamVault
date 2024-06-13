@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, jsonify, request, session
 from models import *
+from extensions import bcrypt
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -12,7 +13,7 @@ def login():
         user = User.query.filter_by(username=username).first()
             
         if user:
-            if user.password == password:
+            if bcrypt.check_password_hash(user.password, password):
                 session['username'] = username
                 print('successful login, user: ' + session['username'])
                 return jsonify({'success': True})
@@ -35,7 +36,8 @@ def signup():
             print('username is taken')
             return jsonify({'success': False}), 401           
         else:
-            new_user = User(email=email, username=username, password=password)
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+            new_user = User(email=email, username=username, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
             print('user: ' + username + ' created!')
