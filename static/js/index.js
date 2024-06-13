@@ -35,12 +35,15 @@ $(document).ready(function() {
             wrapper.innerHTML = [
                 `<div class="alert alert-${type} alert-dismissible" role="alert">`,
                 `   <div>${message}</div>`,
-                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">&times;</button>',
                 '</div>'
             ].join('')
 
-            alertPlaceholder.append(wrapper)}
-
+            alertPlaceholder.append(wrapper)
+        
+            setTimeout(() => {
+                wrapper.remove();
+            }, 3000);}
         
         $.ajax({
             url: '/watch_later',
@@ -82,7 +85,11 @@ $(document).ready(function() {
                 '</div>'
             ].join('')
 
-            alertPlaceholder.append(wrapper)}
+            alertPlaceholder.append(wrapper)
+        
+            setTimeout(() => {
+                wrapper.remove();
+            }, 3000);}
         
         $.ajax({
             url: '/favorites',

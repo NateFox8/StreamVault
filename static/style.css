@@ -40,11 +40,16 @@ body {
     border-bottom: 1px solid white;
 }
 
+.search-bar {
+    padding-left: 15%;
+}
+
 .search-bar input {
     height: 24px;
     width: 400px;
     text-align: center;
     background-color: rgba(255, 255, 255, .3);
+    color: white;
     border: none;
 }
 
@@ -79,7 +84,6 @@ body {
 .container {
     height: 100%;
     margin: 0;
-    padding-top: 15px;
 }
 
 /* home css */
@@ -101,6 +105,7 @@ body {
     margin-left: 50px;
     margin-right: 50px;
     background-color: rgba(255, 255, 255, .3);
+    border-radius: 1.25rem;
 }
 
 .popular-movies::-webkit-scrollbar, .top-rated-movies::-webkit-scrollbar {
@@ -112,7 +117,12 @@ body {
 }
 
 .popular-movies-poster img, .top-rated-movies-poster img{
+    border-radius: 1.25rem;
     height: 305px;
+}
+
+.popular-movies-poster img:hover, .top-rated-movies-poster img:hover{
+    border: 2px solid transparent;
 }
 
 /* favorites & watch later css */
@@ -142,10 +152,104 @@ td {
     border: 1px solid white;
 }
 
+tr:hover {
+    background-color: rgba(0, 0, 0, .3);
+}
+
+/* search page css */
+
+.movie-card-container {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-card {
+    margin-top: 50px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    border: 2px solid transparent;
+    border-radius: 1.25rem;
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.movie-card h2 {
+    text-align: center;
+    text-decoration: 1px underline black;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding-bottom: 5px;
+}
+
+.movie-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-data {
+    padding-left: 75px;
+}
+
+.stream-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.stream-platforms {
+    display: flex;
+    width: 500px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 1.25rem;
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.stream-platforms h3 {
+    align-self: center;
+    text-decoration: 1px underline black;
+}
+
+.flatrate-options, .rent-options, .buy-options {
+    max-height: 120px;
+    max-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+    
+}
+
+.platform {
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 1.25rem;
+}
+
+.no-options {
+    color: rgba(255, 255, 255, .5);
+    margin-left: 180px;
+    padding: 3.5px;
+    font-weight: 500;
+    border-radius: 1.25rem;
+    background-color: rgba(0, 0, 0, .35);
+}
+
 /* alerts css */
 .alert {
     padding: 15px;
-    margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 4px;
     position: relative;
