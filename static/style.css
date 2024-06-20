@@ -24,8 +24,8 @@ body {
 .navbar-icon, .search-bar, .navbar {
     display: flex;
     align-items: center;
-    justify-content: center;
     height: 100%;
+    width: 33%;
 }
 
 .navbar-icon {
@@ -40,17 +40,16 @@ body {
     border-bottom: 1px solid white;
 }
 
-.search-bar {
-    padding-left: 15%;
-}
 
 .search-bar input {
     height: 24px;
     width: 400px;
+    font-size: 16px;
     text-align: center;
     background-color: rgba(255, 255, 255, .3);
     color: white;
     border: none;
+    outline: none;
 }
 
 .search-bar button {
@@ -158,32 +157,39 @@ tr:hover {
 
 /* search page css */
 
+.movie-title {
+    color: rgba(255, 255, 255, .6);
+    text-align: center;
+    text-decoration: 1px underline rgba(255, 255, 255, .6);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 10px;
+}
+
 .movie-card-container {
-    margin: 0;
+    height: 750px;
+    margin: 30px 375px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 1.25rem;
+    background-color: rgba(255, 255, 255, .3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .movie-card {
-    margin-top: 50px;
+    margin: 10px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     width: 500px;
-    border: 2px solid transparent;
-    border-radius: 1.25rem;
-    background-color: rgba(255, 255, 255, .3);
-}
-
-.movie-card h2 {
-    text-align: center;
-    text-decoration: 1px underline black;
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding-bottom: 5px;
+    height: 575px;
+    
 }
 
 .movie-info {
@@ -193,8 +199,67 @@ tr:hover {
     justify-content: center;
 }
 
+.movie-poster img {
+    border-radius: 1.25rem;
+    height: 375px;
+    width: auto;
+}
+
 .movie-data {
-    padding-left: 75px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    padding: 20px;
+    color: rgba(255, 255, 255, .6);
+    font-weight: 300;
+    border-radius: 1.25rem;
+    background-color: rgba(0, 0, 0, .35);
+}
+
+.movie-rate {
+    border: 1px solid white;
+    width: 50px;
+    text-align: center;
+}
+
+.movie-data img{
+    width: 40px;
+    height: 19px;
+}
+
+.movie-card-buttons {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.movie-card-buttons button {
+    width: 33px;
+    height: 33px;
+    margin: 2px;
+    font-size: 18px;
+    border: none;
+    border-radius: 1.5rem;
+    background-color: rgba(255, 255, 255, .3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, .7);
+    cursor: pointer;
+}
+
+.movie-card-buttons button:hover {
+    border: 1px solid white;
+}
+
+.movie-trailer iframe {
+    border-radius: 1.25rem;
+    padding: 2px;
+}
+
+.movie-overview {
+    margin-top: 10px;
+    color: rgba(0, 0, 0, .7);
+    font-weight: 700;
 }
 
 .stream-container {
@@ -209,17 +274,23 @@ tr:hover {
     display: flex;
     width: 500px;
     padding: 20px;
+    margin-top: 10px;
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    border: 2px solid transparent;
     border-radius: 1.25rem;
-    background-color: rgba(255, 255, 255, .3);
+    background-color: rgba(0, 0, 0, .35);
+    color: rgba(255, 255, 255, .6);
 }
 
 .stream-platforms h3 {
     align-self: center;
-    text-decoration: 1px underline black;
+}
+
+.stream-option {
+    text-decoration: 1px underline rgba(255, 255, 255, .6);
+    font-weight: 500;
+    padding-bottom: 2px;
 }
 
 .flatrate-options, .rent-options, .buy-options {
@@ -228,8 +299,7 @@ tr:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: auto;
-    
+    overflow-x: auto;    
 }
 
 .platform {

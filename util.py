@@ -12,13 +12,21 @@ def get_omdb_movie_data(title):
     return movie_data
 
 def get_tmdb_movie_data(title):
-    movie = tmdb.Movies(get_movie_id(title))    
+    movie = tmdb.Movies(get_movie_id(title))
     return(movie.info()) 
 
 def get_movie_id(title):
     search = tmdb.Search()
     search.movie(query=title)
     return search.results[0]['id']
+
+def get_movie_trailer(title):
+    movie = tmdb.Movies(get_movie_id(title))
+    videos = movie.videos()
+
+    for video in videos['results']:
+        if video['type'].lower() == 'trailer':
+            return f"https://www.youtube.com/embed/{video['key']}"
 
 def get_watch_providers(title):
     movie = tmdb.Movies(get_movie_id(title)) 

@@ -127,7 +127,9 @@ def search():
         buy_options, rent_options, flatrate_options = (get_watch_providers(title))
         omdb_info = get_omdb_movie_data(title)
         tmdb_info = get_tmdb_movie_data(title)
-        return render_template('search.html', omdb_info=omdb_info, tmdb_info=tmdb_info, buy_options=buy_options, rent_options=rent_options, flatrate_options=flatrate_options, username=username)
+        movie_trailer = get_movie_trailer(title)
+        return render_template('search.html', omdb_info=omdb_info, tmdb_info=tmdb_info, buy_options=buy_options, rent_options=rent_options, flatrate_options=flatrate_options,
+                               username=username, movie_trailer=movie_trailer)
     else:
         return redirect(url_for('views.home'))
     
