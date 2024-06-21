@@ -35,7 +35,7 @@ class WatchLater(db.Model):
     user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
     
     def __repr__(self):
-        return '<WatchLater %r>' % self.imdb_id
+        return '<WatchLater %r>' % self.watch_later_id
     
 class Favorite(db.Model):
     __tablename__ = 'favorites'
@@ -50,4 +50,17 @@ class Favorite(db.Model):
     user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
     
     def __repr__(self):
-        return '<Favorite %r>' % self.imdb_id
+        return '<Favorite %r>' % self.favorite_id
+    
+class Rate(db.Model):
+    __tablename__ = 'rates'
+    
+    rate_id = db.Column(db.String(36), primary_key=True, unique=True, default=lambda: str(uuid.uuid4()))
+    title = db.Column(db.String(20))
+    rate = db.Column(db.Integer)
+    year = db.Column(db.String(4))
+    
+    user_username = db.Column(db.String(20), db.ForeignKey('users.username'))    
+    
+    def __repr__(self):
+        return '<Rate %r>' % self.rate_id

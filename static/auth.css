@@ -54,6 +54,7 @@ body {
 
 .form-container input {
     border: 2px solid #e0e0e0;
+    outline: none;
     font-weight: 100;
     text-align: left;
 }

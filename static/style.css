@@ -45,9 +45,10 @@ body {
     height: 24px;
     width: 400px;
     font-size: 16px;
+    font-weight: 300;
     text-align: center;
     background-color: rgba(255, 255, 255, .3);
-    color: white;
+    color: rgba(255, 255, 255, .6);
     border: none;
     outline: none;
 }
@@ -56,6 +57,7 @@ body {
     height: 24px;
     border: none;
     background-color: rgba(255, 255, 255, .3);
+    cursor: pointer;
 }
 
 .navbar {
@@ -72,7 +74,7 @@ body {
     height: 24px;
     width: 50%;
     border: none;
-    color: white;
+    color: rgba(255, 255, 255, .6);
     background-color: rgba(255, 255, 255, .3);
 }
 
@@ -87,9 +89,9 @@ body {
 
 /* home css */
 .header {    
-    color: white;
+    color: rgba(255, 255, 255, .6);
     font-weight: 500;
-    text-decoration: 1px underline white;
+    text-decoration: 1px underline rgba(255, 255, 255, .6);
     letter-spacing: 2px;
     margin-left: 50px;
     padding-top: 10px;
@@ -157,22 +159,11 @@ tr:hover {
 
 /* search page css */
 
-.movie-title {
-    color: rgba(255, 255, 255, .6);
-    text-align: center;
-    text-decoration: 1px underline rgba(255, 255, 255, .6);
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 2px;
-    padding: 10px;
-}
-
-.movie-card-container {
-    height: 750px;
-    margin: 30px 375px;
+.search {
+    max-height: 775px;
+    margin: 35px 375px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
     border: 2px solid transparent;
     border-radius: 1.25rem;
@@ -180,16 +171,31 @@ tr:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.movie-title {
+    color: rgba(0, 0, 0, .7);
+    text-align: center;
+    text-decoration: 1px underline rgba(0, 0, 0, .7);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 10px;
+}
+
+.movie-card-container {
+    max-height: 775px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .movie-card {
-    margin: 10px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
     width: 500px;
-    height: 575px;
-    
+    max-height: 775px;
 }
 
 .movie-info {
@@ -212,6 +218,7 @@ tr:hover {
     padding: 20px;
     color: rgba(255, 255, 255, .6);
     font-weight: 300;
+    font-size: 14px;
     border-radius: 1.25rem;
     background-color: rgba(0, 0, 0, .35);
 }
@@ -228,7 +235,7 @@ tr:hover {
 }
 
 .movie-card-buttons {
-    margin: 10px;
+    margin: 10px 0px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -259,7 +266,15 @@ tr:hover {
 .movie-overview {
     margin-top: 10px;
     color: rgba(0, 0, 0, .7);
+    font-weight: 500;
+}
+
+.movie-overview h3 {
     font-weight: 700;
+}
+
+.movie-overview p {
+    font-size: 14px;
 }
 
 .stream-container {
@@ -304,7 +319,7 @@ tr:hover {
 
 .platform {
     height: 50px;
-    margin-right: 10px;
+    margin-right: 3px;
     border-radius: 1.25rem;
 }
 
