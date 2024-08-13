@@ -1,15 +1,24 @@
 import requests
 import tmdbsimple as tmdb
 from api_keys import *
+from models import *
 
-tmdb.API_KEY = TMBD_KEY
+# change value to your TMDB api key
+tmdb.API_KEY = TMDB_KEY
 POSTER_URL = 'https://image.tmdb.org/t/p/w185/'
 
+# change value to your OMDB api key
+OMDB_API_KEY = OMDB_KEY
+OMDB_URL = "http://www.omdbapi.com/?"
+
+# functions for general api use
+
 def get_omdb_movie_data(title):
-    PARAMS = {'apikey': OMDB_KEY, 't': title, 'plot': 'full'}
+    PARAMS = {'apikey': OMDB_API_KEY, 't': title, 'plot': 'full'}
     response = requests.get(url=OMDB_URL, params=PARAMS)
     movie_data = response.json()
-    return movie_data
+    ratings = movie_data.get('Ratings', [])
+    return movie_data, ratings
 
 def get_tmdb_movie_data(title):
     movie = tmdb.Movies(get_movie_id(title))
@@ -81,3 +90,33 @@ def get_top_rated_tv():
     tv.top_rated(language='en')
     shows = [(result['name'], result['poster_path']) for result in tv.results]
     return shows
+
+def get_movie_actors(title):
+    base_url = "https://image.tmdb.org/t/p/w500"
+    movie = tmdb.Movies(get_movie_id(title))
+    actor_names = [actor['name'] for actor in movie.credits()['cast'] if actor['known_for_department'] == 'Acting']
+    actor_images = [actor['profile_path'] for actor in movie.credits()['cast'] if actor['known_for_department'] == 'Acting']
+    actor_image_urls = [f"{base_url}{path}" for path in actor_images]
+    return zip(actor_names, actor_image_urls)
+    
+    
+def get_actor_id(name):
+    actor = tmdb.Search()
+    actor.person(query=name)
+    return actor.results[0]['id']
+
+
+
+# functions for database use
+
+def get_watch_later_id(username, title):
+    if(WatchLater.query.filter_by(user_username=username, title=title).first()):
+        watch_later = WatchLater.query.filter_by(user_username=username, title=title).first()
+        return watch_later.watch_later_id
+    return None
+        
+def get_favorite_id(username, title):
+    if(Favorite.query.filter_by(user_username=username, title=title).first()):
+        favorite = Favorite.query.filter_by(user_username=username, title=title).first()
+        return favorite.favorite_id
+    return None

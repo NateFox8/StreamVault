@@ -1,75 +1,81 @@
 {% extends "base.html" %} {% block title %} StreamVault | {{ tmdb_info.title }} {% endblock %} {% block content
     %}
-    <div class="search">
-        <h1 class="movie-title">{{ tmdb_info.title }} ({{ omdb_info.Year }})</h1>
-        <div class="movie-card-container">
-            <div class="movie-card">
-                <div class="movie-info">
-                    <div class="movie-poster">
-                        <img src="https://image.tmdb.org/t/p/w185/{{ tmdb_info.poster_path }}" alt="movie poster">
-                    </div>
-                    <div class="movie-data">
-                        <p class="movie-rate">{{ omdb_info.Rated }}</p>
-                        <p>{{ omdb_info.Genre }}</p>
-                        <p>{{ tmdb_info.runtime }} minutes</p>
-                        <p>{{ tmdb_info.release_date }}</p>
-                        <p>IMDb: {{ omdb_info.imdbRating }}</p>
-                        <!-- <p>TMDB: {{ tmdb_info.vote_average }}</p> -->
-                        <div class="movie-card-buttons">
-                            <button title="add to watch list" class="material-icons" id="watch-later-btn" type="submit" class="btn btn-primary form-btn"
-                            username={{username}} movie_title="{{omdb_info.Title}}" movie_year="{{omdb_info.Year}}" movie_rated="{{omdb_info.Rated}}"
-                            movie_released="{{ tmdb_info.release_date }}" movie_runtime="{{ tmdb_info.runtime }}">add</button>
-                            <button title="add to favorites" class="material-icons" id="favorite-btn" type="submit" class="btn btn-primary form-btn"
-                            username={{username}} movie_title="{{omdb_info.Title}}" movie_year="{{omdb_info.Year}}" movie_rated="{{omdb_info.Rated}}"
-                            movie_released="{{ tmdb_info.release_date }}" movie_runtime="{{ tmdb_info.runtime }}">favorite</button>
-                            <button title="rate movie" class="material-icons" id="rate-btn" type="submit" class="btn btn-primary form-btn"
-                            username={{username}} movie_title="{{omdb_info.Title}}" movie_year="{{omdb_info.Year}}">star</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-overview">
-                    <h3>Overview</h3>
-                    <p>{{ tmdb_info.overview }}</p>
-                </div>        
+    <div class="search-container">        
+        <div class="main">
+            <h2>{{ tmdb_info.title }}</h2>
+            <p>{{ omdb_info.Rated }} | {{ tmdb_info.release_date }} | {{ omdb_info.Genre }} | {{ tmdb_info.runtime }} minutes</p>
+            <div class="main-container">
+                <img src="https://image.tmdb.org/t/p/w185/{{ tmdb_info.poster_path }}" alt="movie poster">
+                <iframe width="560" height="315" src="{{ movie_trailer }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
-            <div class="movie-card">
-                <div class="movie-trailer">
-                    <iframe width="500" height="315" src="{{ movie_trailer }}" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="stream-platforms">
-                    <h3>Streaming Platforms</h3>
-                    <p class="stream-option">FREE</p>
-                    <div class="flatrate-options">
-                        {% if flatrate_options %}
-                            {% for provider in flatrate_options %}
-                                <img class="platform" src="https://image.tmdb.org/t/p/w185/{{ provider.logo_path }}" alt="{{ provider.provider_name }}">
-                            {% endfor %}
-                        {% else %}
-                            <p class="no-options">NOT AVAILABLE</p>
-                        {% endif %}
-                    </div>
-                    <p class="stream-option">RENT</p>
-                    <div class="rent-options">
-                        {% if rent_options %}
-                            {% for provider in rent_options %}
-                                <img class="platform" src="https://image.tmdb.org/t/p/w185/{{ provider.logo_path }}" alt="{{ provider.provider_name }}">
-                            {% endfor %}
-                        {% else %}
-                            <p class="no-options">NOT AVAILABLE</p>
-                        {% endif %}
-                    </div>
-                    <p class="stream-option">BUY</p>
-                    <div class="buy-options">
-                        {% if buy_options %}
-                            {% for provider in buy_options %}
-                                <img class="platform" src="https://image.tmdb.org/t/p/w185/{{ provider.logo_path }}" alt="{{ provider.provider_name }}">
-                            {% endfor %}
-                        {% else %}
-                            <p class="no-options">NOT AVAILABLE</p>
-                        {% endif %}
-                    </div>
-                </div>            
+            <div class="buttons">
+                <button title="add to watch list" class="material-icons" id="watch-later-btn" type="submit" username={{username}} 
+                movie_title="{{omdb_info.Title}}" movie_year="{{omdb_info.Year}}" movie_rated="{{omdb_info.Rated}}"
+                movie_released="{{ tmdb_info.release_date }}" movie_runtime="{{ tmdb_info.runtime }}">add</button>
+                            
+                <button title="add to favorites" class="material-icons" id="favorite-btn" type="submit" username={{username}} 
+                movie_title="{{omdb_info.Title}}" movie_year="{{omdb_info.Year}}" movie_rated="{{omdb_info.Rated}}"
+                movie_released="{{ tmdb_info.release_date }}" movie_runtime="{{ tmdb_info.runtime }}">favorite</button>
+            </div>
+            <div class="ratings">
+                {% for rating in ratings %}
+                    <p>{{rating.Source}}: {{rating.Value}}</p>
+                {% endfor%}
             </div>
         </div>
-    </div>    
+        <div class="sidebar-container">
+            <h2>actors</h2>
+            <div class="sidebar">
+                {% for actor in actors %}
+                    <div class="actor">
+                        <img src="{{actor[1]}}" alt="(No photo)">
+                        <p>{{actor[0]}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="movie-plot-container">
+            <h2>movie overview</h2>
+            <p>{{ tmdb_info.overview }} </p>
+        </div>
+        <div class="streaming-platforms-container">
+            <h2>streaming platforms</h2>
+            <div class="free-stream">
+                <p>free</p>
+                <div class="platforms">
+                    {% if flatrate_options %}
+                        {% for provider in flatrate_options %}
+                            <img class="platform" src="https://image.tmdb.org/t/p/w185/{{ provider.logo_path }}" alt="{{ provider.provider_name }}">
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-options">NOT AVAILABLE</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="rent-stream">
+                <p>rent</p>
+                <div class="platforms">
+                    {% if rent_options %}
+                        {% for provider in rent_options %}
+                            <img class="platform" src="https://image.tmdb.org/t/p/w185/{{ provider.logo_path }}" alt="{{ provider.provider_name }}">
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-options">NOT AVAILABLE</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="buy-stream">
+                <p>buy</p>
+                <div class="platforms">
+                    {% if buy_options %}
+                        {% for provider in buy_options %}
+                            <img class="platform" src="https://image.tmdb.org/t/p/w185/{{ provider.logo_path }}" alt="{{ provider.provider_name }}">
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-options">NOT AVAILABLE</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>     
 {% endblock %}

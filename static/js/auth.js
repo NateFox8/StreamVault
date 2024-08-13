@@ -29,7 +29,7 @@ $(document).ready(function() {
             data: {username: username, password: password},
             success: function(response) {
                 if (response.success) {
-                    window.location.href = '/profile';
+                    window.location.href = '/home';
                 } else {
                     alert('Login failed. Please try again.', 'danger');
                 }
@@ -77,7 +77,7 @@ $(document).ready(function() {
             data: {email: email, username: username, password1: password1},
             success: function(response) {
                 if (response.success) {
-                    window.location.href = '/profile';
+                    window.location.href = '/home';
                 } else {
                     alert('Signup failed. Please try again.', 'success');
                 }

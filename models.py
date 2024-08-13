@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     # unique keys
     watch_later = db.relationship('WatchLater', backref='user')
     favorites = db.relationship('Favorite', backref='user')    
+    rates = db.relationship('Rate', backref='user')    
     
     def __repr__(self):
         return '<User %r>' % self.username

@@ -31,11 +31,9 @@ def home():
 def watch_later(): 
     if request.method == 'POST':
         username = request.form.get('username')
-        movie_title = request.form.get('movie_title')  
-               
-        watch_later = WatchLater.query.filter_by(user_username=username, title=movie_title).first()
+        movie_title = request.form.get('movie_title')
         
-        if watch_later:
+        if get_watch_later_id(username, movie_title):
             print('Movie already in user\'s watch later list')
             return jsonify({'success': False})
         else: 
@@ -63,9 +61,7 @@ def favorites():
         username = request.form.get('username')
         movie_title = request.form.get('movie_title')
         
-        favorite = Favorite.query.filter_by(user_username=username, title=movie_title).first()
-        
-        if favorite:
+        if get_favorite_id(username, movie_title):
             print('Movie already in user\'s favorites list')
             return jsonify({'success': False})
         else: 
@@ -121,15 +117,20 @@ def profile():
 @login_required
 def search():   
     username = session['username']       
-    title = request.args.get('title')    
+    title = request.args.get('title')
     
     if title:
         buy_options, rent_options, flatrate_options = (get_watch_providers(title))
-        omdb_info = get_omdb_movie_data(title)
+        omdb_info, ratings = get_omdb_movie_data(title)
         tmdb_info = get_tmdb_movie_data(title)
         movie_trailer = get_movie_trailer(title)
-        return render_template('search.html', omdb_info=omdb_info, tmdb_info=tmdb_info, buy_options=buy_options, rent_options=rent_options, flatrate_options=flatrate_options,
-                               username=username, movie_trailer=movie_trailer)
+        actors = get_movie_actors(title)
+        return render_template('search.html', omdb_info=omdb_info, tmdb_info=tmdb_info, ratings=ratings, 
+            buy_options=buy_options, rent_options=rent_options, flatrate_options=flatrate_options,
+            username=username, movie_trailer=movie_trailer,
+            favorite_id=get_favorite_id(username, title), 
+            watch_later_id=get_watch_later_id(username, title),
+            actors=actors)
     else:
         return redirect(url_for('views.home'))
     
