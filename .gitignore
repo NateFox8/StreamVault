@@ -1,0 +1,7 @@
+*.sqlite
+
+__pycache__/*
+
+keys.py
+
+.vscode/*
