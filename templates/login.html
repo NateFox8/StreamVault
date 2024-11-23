@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamVault | Login</title>
+    <link rel="stylesheet" href="static/auth.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/auth.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Login</h2>
+            <p>Enter your credentials</p>
+            <form class="login-form" method="POST">
+                <input type="text" placeholder="Username" id="username" required>
+                <input type="password" placeholder="Password" id="password" required>
+                <a href="#">Forgot your password?</a>
+                <button id="login-btn" type="submit">LOGIN</button>
+            </form>            
+            <footer>Create an account <a href="signup">here</a></footer>
+        </div>
+    </div>    
+</body>
+</html>

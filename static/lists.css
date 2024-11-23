@@ -1,0 +1,41 @@
+:root {
+    --color-primary: #fff;
+    --color-secondary: #222;
+    --color-tertiary: #4779D6;
+    --color-accent: #D6A02D;
+    --color-favorite: #FFD700;
+    --color-add: #0f0;
+    --color-trash: #f00;
+    --alert-danger: #721c24;
+    --alert-success: #155724; 
+}
+
+.favorites-table, .watch-later-table {
+    color: white;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.favorites-table a, .watch-later-table a {
+    text-decoration: none;
+    color: white;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+}
+  
+th {
+    background-color: rgba(0, 0, 0, .3);
+    border-bottom: 1px solid white;
+}
+
+td {
+    background-color: rgba(255, 255, 255, .3);
+    border: 1px solid white;
+}
+
+tr:hover {
+    background-color: rgba(0, 0, 0, .3);
+}

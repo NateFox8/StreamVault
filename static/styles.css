@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+/* base styling */
+
+:root {
+    --color-primary: #fff;
+    --color-secondary: #222;
+    --color-tertiary: #4779D6;
+    --color-accent: #D6A02D;
+    --color-favorite: #FFD700;
+    --color-add: #0f0;
+    --color-trash: #f00;
+    --alert-danger: #721c24;
+    --alert-success: #155724; 
+}
+
+* {
+    font-family: 'Ubuntu';
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: var(--color-primary);
+    background-color: var(--color-secondary);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+.logo {
+    color: var(--color-primary);
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-btn {
+    flex: 1;
+    color: var(--color-primary);
+    background-color: var(--color-secondary);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 5px 15px;
+}
+
+.nav-btn a {
+    color: var(--color-primary);
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.nav-btn:hover {
+    cursor: pointer;
+    background-color: var(--color-tertiary);
+    color: var(--color-secondary);
+}
+
+/* home page styling */
+
+
+
+/* search page styling */
+
+
+/* alerts css */
+.alert {
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: relative;
+}
+
+.alert-success {
+    color: var(--alert-success);
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: var(--alert-danger);
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1.25rem 1rem;
+    color: inherit;
+    background: none;
+    border: none;
+}
+
+/* favorites & watch later css */
+

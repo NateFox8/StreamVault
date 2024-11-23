@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="/static/search.css">
+    <link rel="stylesheet" href="/static/lists.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/static/js/index.js"></script>    
+</head>
+<body>
+    <div class="nav-container">
+        <a href="home" class="logo">StreamVault</a>
+        <div class="nav">
+            <a href="favorites"><button class="nav-btn">Favorites</button></a>
+            <a href="watch_later"><button class="nav-btn">Watch Later</button></a>
+        </div>
+    </div>   
+    <div id="liveAlertPlaceholder"></div>
+    <div class="base-container">{% block content %}{% endblock %}</div> 
+</body>
+</html>

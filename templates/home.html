@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}StreamVault | Home{% endblock %} {% block content
+    %}
+    <div class="header-container">
+        <form role="search" action="http://127.0.0.1:5000/search" method="get">
+            <input id="search-input" class="searchbar" name="title" type="text" placeholder="search...">
+            <button type="submit" class="search-btn"><svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#e8eaed"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></button>
+        </form>
+    </div>
+    <div class="container">
+        <div class="card">
+            <p class="card-header"><svg class="fav-icon" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#e8eaed"><path d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"/></svg></p>
+            <h4 class="card-header">Add movies to favorites</h4>
+        </div>
+        <div class="card">
+            <p class="card-header"><svg class="stream-icon" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#e8eaed"><path d="m380-300 280-180-280-180v360ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z"/></svg></p>
+            <h4 class="card-header">View available streaming platforms</h4>
+        </div>
+        <div class="card">
+            <p class="card-header"><svg class="add-icon" xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#e8eaed"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg></p>
+            <h4 class="card-header">Add movies to watch later</h4>
+        </div>
+    </div>
+    <div class="container swiper-container">
+        <h2>top rated</h2>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                {% for movie in top_rated %}
+                <div class="swiper-slide">
+                    <a href="http://127.0.0.1:5000/search?title={{ movie[0] }}">
+                        <img src="https://image.tmdb.org/t/p/w185/{{ movie[1] }}" alt="{{ movie[0] }} Poster">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="container swiper-container">
+        <h2>popular</h2>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                {% for movie in movies %}
+                <div class="swiper-slide">
+                    <a href="http://127.0.0.1:5000/search?title={{ movie[0] }}">
+                        <img src="https://image.tmdb.org/t/p/w185/{{ movie[1] }}" alt="{{ movie[0] }} Poster">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>      
+
+    <script src="/static/js/swiper.js"></script>
+{% endblock %}

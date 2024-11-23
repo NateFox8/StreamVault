@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamVault | Sign Up</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="static/auth.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/auth.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container sign-up">
+            <h2>Create an account</h2>
+            <p>Register with your credentials</p>
+            <form method="POST">
+                <input type="text" placeholder="Username" id="username" required>
+                <input type="email" placeholder="Email" id="email" required>
+                <input type="password" placeholder="Password" id="password1" required>
+                <input type="password" placeholder="Confirm password" id="password2" required>
+                <button type="submit" id="signup-btn">SIGN UP</button>
+            </form>                
+            <footer>Existing user's, sign in <a href="login">here</a></footer>
+        </div>
+    </div>
+</body>
+</html>
